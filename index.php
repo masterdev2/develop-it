@@ -75,6 +75,9 @@ html,body{overflow-x:hidden;max-width:100vw;margin:0}
 body{font-family:'Inter',system-ui,sans-serif;background:#050510;color:#e2e8f0}
 .font-mono{font-family:'JetBrains Mono',monospace}
 html{scroll-behavior:smooth}
+/* Font fallback to prevent CLS */
+@font-face{font-family:'Inter';font-display:swap;src:local('Inter')}
+@font-face{font-family:'JetBrains Mono';font-display:swap;src:local('JetBrains Mono')}
 
 /* ── Futuristic core ── */
 :root{--neon:#6366f1;--neon2:#06b6d4;--glow:rgba(99,102,241,.4);--dark:#050510;--card:#0a0a1a}
@@ -82,13 +85,13 @@ html{scroll-behavior:smooth}
 .grid-bg{background-image:linear-gradient(rgba(99,102,241,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,.06) 1px,transparent 1px);background-size:72px 72px;animation:gridMove 8s linear infinite;will-change:transform}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 @keyframes pulse-ring{0%{box-shadow:0 0 0 0 rgba(99,102,241,.5)}70%{box-shadow:0 0 0 12px rgba(99,102,241,0)}100%{box-shadow:0 0 0 0 rgba(99,102,241,0)}}
-.card-glass{background:rgba(15,15,35,.6);backdrop-filter:blur(16px);border:1px solid rgba(99,102,241,.12);transition:all .3s}
+.card-glass{background:rgba(15,15,35,.6);backdrop-filter:blur(16px);border:1px solid rgba(99,102,241,.12);transition:transform .3s,box-shadow .3s,border-color .3s}
 .card-glass:hover{border-color:rgba(99,102,241,.35);transform:translateY(-4px);box-shadow:0 20px 60px rgba(99,102,241,.1)}
 .glow-text{background:linear-gradient(135deg,#818cf8,#06b6d4,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .glow-border{border:1px solid rgba(99,102,241,.2);box-shadow:0 0 20px rgba(99,102,241,.08)}
-.btn-neon{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;transition:all .2s;box-shadow:0 4px 20px rgba(99,102,241,.3)}
+.btn-neon{background:linear-gradient(135deg,#6366f1,#8b5cf6);color:#fff;transition:transform .2s,box-shadow .2s;box-shadow:0 4px 20px rgba(99,102,241,.3)}
 .btn-neon:hover{box-shadow:0 8px 30px rgba(99,102,241,.5);transform:translateY(-2px)}
-.btn-ghost{border:1px solid rgba(255,255,255,.15);color:#fff;transition:all .2s}
+.btn-ghost{border:1px solid rgba(255,255,255,.15);color:#fff;transition:background-color .2s,border-color .2s}
 .btn-ghost:hover{background:rgba(255,255,255,.05);border-color:rgba(99,102,241,.4)}
 .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#818cf8}
 .section-dark{background:#050510}.section-darker{background:#030308}
@@ -99,15 +102,15 @@ html{scroll-behavior:smooth}
 ::-webkit-scrollbar-thumb{background:#6366f1;border-radius:3px}
 
 /* ── Lang switcher ── */
-.lang-switcher{display:flex;align-items:center;background:rgba(255,255,255,.06);border-radius:9999px;padding:2px;gap:2px}
-.lang-btn{padding:5px 12px;border-radius:9999px;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;border:none;background:transparent;color:#cbd5e1}
-.lang-btn.active{background:#6366f1;color:#fff;box-shadow:0 1px 8px rgba(99,102,241,.4)}
-.lang-btn:hover:not(.active){color:#818cf8}
+.lang-switcher{display:flex;align-items:center;background:rgba(255,255,255,.08);border-radius:9999px;padding:3px;gap:2px}
+.lang-btn{padding:6px 12px;border-radius:9999px;font-size:12px;font-weight:700;cursor:pointer;transition-property:background-color,color;transition-duration:.2s;border:none;background:transparent;color:#e2e8f0}
+.lang-btn.active{background:#4f46e5;color:#fff;box-shadow:0 1px 8px rgba(79,70,229,.5)}
+.lang-btn:hover:not(.active){color:#a5b4fc}
 
 /* ── FAQ ── */
-.faq-filter-btn{background:rgba(255,255,255,.04);color:#94a3b8;border:1px solid rgba(255,255,255,.08);transition:all .2s}
+.faq-filter-btn{background:rgba(255,255,255,.04);color:#94a3b8;border:1px solid rgba(255,255,255,.08);transition:background-color .2s,color .2s,border-color .2s}
 .faq-filter-btn.active{background:#6366f1;color:#fff;border-color:#6366f1}
-.faq-filter-btn:hover:not(.active){border-color:#6366f1;color:#818cf8}
+.faq-filter-btn:hover:not(.active){border-color:#6366f1;color:#a5b4fc}
 @keyframes slideDown{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
 .faq-answer{animation:slideDown .3s ease-out}
 .faq-item.active .faq-icon{transform:rotate(180deg)}
@@ -134,10 +137,10 @@ html{scroll-behavior:smooth}
         <span class="text-lg sm:text-xl font-bold text-white truncate">DEVELOP<span class="text-indigo-400">.IT</span></span>
       </a>
       <div class="nav-links hidden md:flex items-center gap-5 lg:gap-7">
-        <a href="#about"     class="text-slate-400 hover:text-white transition text-sm" data-i18n="nav_about">À propos</a>
-        <a href="#solutions" class="text-slate-400 hover:text-white transition text-sm" data-i18n="nav_solutions">Solutions</a>
-        <a href="blog/"      class="text-slate-400 hover:text-white transition text-sm" data-i18n="nav_blog">Blog</a>
-        <a href="#faq"       class="text-slate-400 hover:text-white transition text-sm" data-i18n="nav_faq">FAQ</a>
+        <a href="#about"     class="text-slate-400 hover:text-white transition-colors text-sm" data-i18n="nav_about">À propos</a>
+        <a href="#solutions" class="text-slate-400 hover:text-white transition-colors text-sm" data-i18n="nav_solutions">Solutions</a>
+        <a href="blog/"      class="text-slate-400 hover:text-white transition-colors text-sm" data-i18n="nav_blog">Blog</a>
+        <a href="#faq"       class="text-slate-400 hover:text-white transition-colors text-sm" data-i18n="nav_faq">FAQ</a>
         <a href="#contact"   class="btn-neon px-5 py-2 rounded-lg text-sm font-semibold" data-i18n="nav_contact">Contact</a>
       </div>
       <div class="lang-switcher">
@@ -163,22 +166,22 @@ html{scroll-behavior:smooth}
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-28 relative z-10 w-full">
     <div class="max-w-4xl mx-auto text-center">
-      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm mb-6 glow-border" style="background:rgba(99,102,241,.08)" data-aos="fade-up">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs sm:text-sm mb-6 glow-border" style="background:rgba(99,102,241,.08)">
         <span class="relative flex h-2 w-2"><span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span><span class="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span></span>
         <span class="text-indigo-300 font-mono text-xs tracking-wider" data-i18n="hero_badge">✨ Innovation & Excellence depuis 2014</span>
       </div>
-      <h1 class="hero-h1 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[1.05] mb-6 tracking-tight" data-aos="fade-up" data-aos-delay="100">
+      <h1 class="hero-h1 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[1.05] mb-6 tracking-tight">
         <span class="text-white" data-i18n="hero_h1_line">Votre partenaire en</span><br>
         <span class="glow-text" data-i18n="hero_h1_gradient">Transformation Digitale & IA</span>
       </h1>
-      <p class="text-base sm:text-xl text-slate-400 leading-relaxed max-w-2xl mx-auto mb-8" data-aos="fade-up" data-aos-delay="200" data-i18n="hero_desc">
+      <p class="text-base sm:text-xl text-slate-400 leading-relaxed max-w-2xl mx-auto mb-8" data-i18n="hero_desc">
         Depuis plus de <strong class="text-indigo-300">10 ans</strong>, <strong class="text-indigo-300">DEVELOP IT</strong> accompagne les entreprises dans la conception de solutions informatiques innovantes, performantes et évolutives au Maroc et à l'international.
       </p>
-      <div class="flex flex-wrap justify-center gap-4 mb-12" data-aos="fade-up" data-aos-delay="300">
+      <div class="flex flex-wrap justify-center gap-4 mb-12">
         <a href="#contact" class="btn-neon px-7 sm:px-10 py-3.5 sm:py-4 rounded-xl font-semibold text-sm sm:text-base" data-i18n="hero_cta1">🚀 Démarrer un projet</a>
         <a href="#solutions" class="btn-ghost px-7 sm:px-10 py-3.5 sm:py-4 rounded-xl font-semibold text-sm sm:text-base" data-i18n="hero_cta2">Découvrir nos solutions</a>
       </div>
-      <div class="flex justify-center gap-8 sm:gap-14" data-aos="fade-up" data-aos-delay="400">
+      <div class="flex justify-center gap-8 sm:gap-14">
         <div class="text-center"><div class="text-3xl sm:text-4xl font-black text-white">50+</div><div class="text-xs text-slate-500 font-mono uppercase tracking-wider mt-1" data-i18n="stat1">Projets réalisés</div></div>
         <div class="w-px bg-white/10"></div>
         <div class="text-center"><div class="text-3xl sm:text-4xl font-black text-white">98%</div><div class="text-xs text-slate-500 font-mono uppercase tracking-wider mt-1" data-i18n="stat2">Satisfaction client</div></div>
@@ -560,8 +563,8 @@ html{scroll-behavior:smooth}
       <div>
         <h4 class="text-white font-semibold mb-3 text-sm" data-i18n="footer_follow">Suivez-nous</h4>
         <div class="flex gap-3">
-          <a href="#" class="w-11 h-11 bg-white/5 rounded-lg flex items-center justify-center hover:bg-indigo-600 transition ring-1 ring-white/10" aria-label="Facebook"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
-          <a href="#" class="w-11 h-11 bg-white/5 rounded-lg flex items-center justify-center hover:bg-indigo-600 transition ring-1 ring-white/10" aria-label="LinkedIn"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="#" class="w-11 h-11 bg-white/5 rounded-lg flex items-center justify-center hover:bg-indigo-600 transition-colors ring-1 ring-white/10" aria-label="Facebook"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+          <a href="#" class="w-11 h-11 bg-white/5 rounded-lg flex items-center justify-center hover:bg-indigo-600 transition-colors ring-1 ring-white/10" aria-label="LinkedIn"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
         </div>
       </div>
     </div>
@@ -574,7 +577,7 @@ html{scroll-behavior:smooth}
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
 <script>
 document.addEventListener('DOMContentLoaded',function(){
-  if(typeof AOS!=='undefined') AOS.init({duration:700,once:true,offset:50});
+  if(typeof AOS!=='undefined') AOS.init({duration:700,once:true,offset:50,disable:'mobile'});
   document.querySelectorAll('.faq-question').forEach(btn=>{
     btn.addEventListener('click',()=>{
       const item=btn.parentElement,ans=btn.nextElementSibling,wasActive=item.classList.contains('active');
