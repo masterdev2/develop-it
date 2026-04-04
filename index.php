@@ -61,7 +61,7 @@ try {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
-<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.tailwindcss.com" defer></script>
 <link rel="preload" as="style" href="https://unpkg.com/aos@2.3.1/dist/aos.css" onload="this.onload=null;this.rel='stylesheet'">
 <noscript><link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css"></noscript>
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-RRH1J9XH1W"></script>
@@ -78,8 +78,8 @@ html{scroll-behavior:smooth}
 
 /* ── Futuristic core ── */
 :root{--neon:#6366f1;--neon2:#06b6d4;--glow:rgba(99,102,241,.4);--dark:#050510;--card:#0a0a1a}
-@keyframes gridMove{from{background-position:0 0}to{background-position:72px 72px}}
-.grid-bg{background-image:linear-gradient(rgba(99,102,241,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,.06) 1px,transparent 1px);background-size:72px 72px;animation:gridMove 8s linear infinite}
+@keyframes gridMove{from{transform:translate3d(0,0,0)}to{transform:translate3d(72px,72px,0)}}
+.grid-bg{background-image:linear-gradient(rgba(99,102,241,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(99,102,241,.06) 1px,transparent 1px);background-size:72px 72px;animation:gridMove 8s linear infinite;will-change:transform}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 @keyframes pulse-ring{0%{box-shadow:0 0 0 0 rgba(99,102,241,.5)}70%{box-shadow:0 0 0 12px rgba(99,102,241,0)}100%{box-shadow:0 0 0 0 rgba(99,102,241,0)}}
 .card-glass{background:rgba(15,15,35,.6);backdrop-filter:blur(16px);border:1px solid rgba(99,102,241,.12);transition:all .3s}
@@ -100,7 +100,7 @@ html{scroll-behavior:smooth}
 
 /* ── Lang switcher ── */
 .lang-switcher{display:flex;align-items:center;background:rgba(255,255,255,.06);border-radius:9999px;padding:2px;gap:2px}
-.lang-btn{padding:4px 10px;border-radius:9999px;font-size:11px;font-weight:600;cursor:pointer;transition:all .2s;border:none;background:transparent;color:#94a3b8}
+.lang-btn{padding:5px 12px;border-radius:9999px;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s;border:none;background:transparent;color:#cbd5e1}
 .lang-btn.active{background:#6366f1;color:#fff;box-shadow:0 1px 8px rgba(99,102,241,.4)}
 .lang-btn:hover:not(.active){color:#818cf8}
 
@@ -317,9 +317,9 @@ html{scroll-behavior:smooth}
     </div>
     <?php
     $biz_sols=[
-      ['https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&q=60','sol1_title','GESCOM ERP','sol1_badge','ERP','sol1_desc','Solution ERP complète : comptabilité multi-devises, stocks, CRM, finances et Business Intelligence.','ges_com.php','sol1_cta','Découvrir la solution'],
-      ['https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&q=60','sol2_title','HR Manager','sol2_badge','RH','sol2_desc','Pointage GPS et gestion RH : présence temps réel, congés, rapports et tableaux de bord analytiques.','solution_pointage.php','sol2_cta','Découvrir la solution'],
-      ['https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&q=60','sol4_title','BTP Manager','sol4_badge','BTP','sol4_desc','ERP sectoriel BTP : gestion de projets, stocks, finances, personnel et comptabilité temps réel.','btp_manager.php','sol4_cta','Découvrir la solution'],
+      ['https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&q=50&fm=webp','sol1_title','GESCOM ERP','sol1_badge','ERP','sol1_desc','Solution ERP complète : comptabilité multi-devises, stocks, CRM, finances et Business Intelligence.','ges_com.php','sol1_cta','Découvrir la solution'],
+      ['https://images.unsplash.com/photo-1553877522-43269d4ea984?w=400&q=50&fm=webp','sol2_title','HR Manager','sol2_badge','RH','sol2_desc','Pointage GPS et gestion RH : présence temps réel, congés, rapports et tableaux de bord analytiques.','solution_pointage.php','sol2_cta','Découvrir la solution'],
+      ['https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=400&q=50&fm=webp','sol4_title','BTP Manager','sol4_badge','BTP','sol4_desc','ERP sectoriel BTP : gestion de projets, stocks, finances, personnel et comptabilité temps réel.','btp_manager.php','sol4_cta','Découvrir la solution'],
     ];
     ?>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -530,19 +530,43 @@ html{scroll-behavior:smooth}
 </main>
 
 <!-- ── FOOTER ── -->
-<footer class="py-10 sm:py-12 border-t border-white/5" style="background:#030308" role="contentinfo">
+<footer class="py-10 sm:py-12 border-t border-white/5" style="background:#0a0a14" role="contentinfo">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <div class="footer-grid grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mb-8">
       <div class="col-span-2 md:col-span-1">
         <div class="flex items-center gap-2 mb-4"><img src="/logo.jfif" alt="DEVELOP IT" width="32" height="32" class="w-7 h-7 rounded-lg object-cover ring-1 ring-indigo-500/30"><span class="text-white font-bold">DEVELOP<span class="text-indigo-400">.IT</span></span></div>
-        <p class="text-xs text-slate-500 leading-relaxed" data-i18n="footer_desc">Agence de développement informatique et intelligence artificielle basée au Maroc.</p>
+        <p class="text-sm text-slate-300 leading-relaxed" data-i18n="footer_desc">Agence de développement informatique et intelligence artificielle basée au Maroc.</p>
       </div>
-      <div><h4 class="text-white font-semibold mb-3 text-sm" data-i18n="footer_services">Services</h4><ul class="space-y-1.5 text-xs text-slate-500"><li><a href="#" class="hover:text-indigo-400 transition" data-i18n="footer_svc1">Développement Web</a></li><li><a href="#" class="hover:text-indigo-400 transition" data-i18n="footer_svc2">Applications Mobile</a></li><li><a href="#" class="hover:text-indigo-400 transition" data-i18n="footer_svc3">Intelligence Artificielle</a></li><li><a href="#" class="hover:text-indigo-400 transition" data-i18n="footer_svc4">Cloud & DevOps</a></li></ul></div>
-      <div><h4 class="text-white font-semibold mb-3 text-sm" data-i18n="footer_solutions">Solutions</h4><ul class="space-y-1.5 text-xs text-slate-500"><li><a href="ges_com.php" class="hover:text-indigo-400 transition">GESCOM ERP</a></li><li><a href="solution_pointage.php" class="hover:text-indigo-400 transition">HR Manager</a></li><li><a href="auto_post_ai.php" class="hover:text-indigo-400 transition">Auto-Post AI</a></li><li><a href="btp_manager.php" class="hover:text-indigo-400 transition">BTP Manager</a></li><li><a href="wandrly.php" class="hover:text-indigo-400 transition">Wandrly</a></li><li><a href="glowai.php" class="hover:text-indigo-400 transition">GlowAI</a></li></ul></div>
-      <div><h4 class="text-white font-semibold mb-3 text-sm" data-i18n="footer_follow">Suivez-nous</h4><div class="flex gap-3"><a href="#" class="w-9 h-9 bg-white/5 rounded-lg flex items-center justify-center hover:bg-indigo-600 transition ring-1 ring-white/10" aria-label="Facebook"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a><a href="#" class="w-9 h-9 bg-white/5 rounded-lg flex items-center justify-center hover:bg-indigo-600 transition ring-1 ring-white/10" aria-label="LinkedIn"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a></div></div>
+      <div>
+        <h4 class="text-white font-semibold mb-3 text-sm" data-i18n="footer_services">Services</h4>
+        <ul class="space-y-2 text-sm text-slate-300">
+          <li><a href="#about" class="hover:text-indigo-400 transition py-1 inline-block" data-i18n="footer_svc1">Développement Web</a></li>
+          <li><a href="#about" class="hover:text-indigo-400 transition py-1 inline-block" data-i18n="footer_svc2">Applications Mobile</a></li>
+          <li><a href="#about" class="hover:text-indigo-400 transition py-1 inline-block" data-i18n="footer_svc3">Intelligence Artificielle</a></li>
+          <li><a href="#about" class="hover:text-indigo-400 transition py-1 inline-block" data-i18n="footer_svc4">Cloud & DevOps</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold mb-3 text-sm" data-i18n="footer_solutions">Solutions</h4>
+        <ul class="space-y-2 text-sm text-slate-300">
+          <li><a href="ges_com.php" class="hover:text-indigo-400 transition py-1 inline-block">GESCOM ERP</a></li>
+          <li><a href="solution_pointage.php" class="hover:text-indigo-400 transition py-1 inline-block">HR Manager</a></li>
+          <li><a href="auto_post_ai.php" class="hover:text-indigo-400 transition py-1 inline-block">Auto-Post AI</a></li>
+          <li><a href="btp_manager.php" class="hover:text-indigo-400 transition py-1 inline-block">BTP Manager</a></li>
+          <li><a href="wandrly.php" class="hover:text-indigo-400 transition py-1 inline-block">Wandrly</a></li>
+          <li><a href="glowai.php" class="hover:text-indigo-400 transition py-1 inline-block">GlowAI</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="text-white font-semibold mb-3 text-sm" data-i18n="footer_follow">Suivez-nous</h4>
+        <div class="flex gap-3">
+          <a href="#" class="w-11 h-11 bg-white/5 rounded-lg flex items-center justify-center hover:bg-indigo-600 transition ring-1 ring-white/10" aria-label="Facebook"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+          <a href="#" class="w-11 h-11 bg-white/5 rounded-lg flex items-center justify-center hover:bg-indigo-600 transition ring-1 ring-white/10" aria-label="LinkedIn"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        </div>
+      </div>
     </div>
-    <div class="border-t border-white/5 pt-6 text-center text-xs text-slate-600">
-      <p data-i18n="footer_copy">© 2026 <strong class="text-slate-400">DEVELOP IT</strong> | Développement Informatique & Intelligence Artificielle | Tous droits réservés</p>
+    <div class="border-t border-white/5 pt-6 text-center text-sm text-slate-400">
+      <p data-i18n="footer_copy">© 2026 <strong class="text-white">DEVELOP IT</strong> | Développement Informatique & Intelligence Artificielle | Tous droits réservés</p>
     </div>
   </div>
 </footer>
@@ -625,7 +649,7 @@ fr:{
   contact_name_label:'Nom complet *',contact_name_ph:'Votre nom',contact_email_label:'Email *',contact_subject_label:'Sujet *',contact_subject_ph:'Comment pouvons-nous vous aider?',contact_msg_label:'Message *',contact_msg_ph:'Décrivez votre projet...',contact_submit:'🚀 Envoyer le message',
   footer_desc:'Agence de développement informatique et intelligence artificielle basée au Maroc.',footer_services:'Services',footer_solutions:'Solutions',footer_follow:'Suivez-nous',
   footer_svc1:'Développement Web',footer_svc2:'Applications Mobile',footer_svc3:'Intelligence Artificielle',footer_svc4:'Cloud & DevOps',
-  footer_copy:'© 2026 <strong class="text-slate-400">DEVELOP IT</strong> | Développement Informatique & Intelligence Artificielle | Tous droits réservés',
+  footer_copy:'© 2026 <strong class="text-white">DEVELOP IT</strong> | Développement Informatique & Intelligence Artificielle | Tous droits réservés',
 },
 en:{
   nav_about:'About',nav_solutions:'Solutions',nav_blog:'Blog',nav_faq:'FAQ',nav_contact:'Contact',
@@ -684,7 +708,7 @@ en:{
   contact_name_label:'Full name *',contact_name_ph:'Your name',contact_email_label:'Email *',contact_subject_label:'Subject *',contact_subject_ph:'How can we help?',contact_msg_label:'Message *',contact_msg_ph:'Describe your project...',contact_submit:'🚀 Send message',
   footer_desc:'Software development and AI agency based in Morocco.',footer_services:'Services',footer_solutions:'Solutions',footer_follow:'Follow us',
   footer_svc1:'Web Development',footer_svc2:'Mobile Apps',footer_svc3:'Artificial Intelligence',footer_svc4:'Cloud & DevOps',
-  footer_copy:'© 2026 <strong class="text-slate-400">DEVELOP IT</strong> | Software Development & AI | All rights reserved',
+  footer_copy:'© 2026 <strong class="text-white">DEVELOP IT</strong> | Software Development & AI | All rights reserved',
 }};
 function setLang(lang,btn){
   document.querySelectorAll('.lang-btn').forEach(b=>b.classList.remove('active'));
