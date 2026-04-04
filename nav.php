@@ -9,7 +9,7 @@ $base    = $is_blog ? '/' : '';
   <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
     <div class="flex items-center justify-between gap-3">
       <a href="<?= $base ?>/" class="flex items-center gap-2 sm:gap-3 min-w-0">
-        <img src="<?= $base ?>/logo.jfif" alt="DEVELOP IT logo" width="40" height="40"
+        <img src="/logo.jfif" alt="DEVELOP IT logo" width="40" height="40"
              class="w-8 h-8 sm:w-10 sm:h-10 rounded-sm object-cover flex-shrink-0">
         <span class="text-lg sm:text-2xl font-bold text-slate-800 truncate">DEVELOP IT</span>
       </a>
