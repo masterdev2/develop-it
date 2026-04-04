@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Block admin/config files
+Disallow: /config.php
+Disallow: /.env
+Disallow: /blog/generate.php
+Disallow: /blog/linkedin-callback.php
+
+# Sitemap
+Sitemap: https://develop-it.tech/sitemap.xml

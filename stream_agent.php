@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_contact'])) {
   <meta name="description" content="منصة ذكاء اصطناعي تجلب أحداث الرياضة الحية، تبحث عن روابط البث، وتنشر تلقائياً على فيسبوك بالعربية."/>
   <meta name="keywords" content="بث مباشر, مباريات رياضية, كرة القدم, ذكاء اصطناعي, فيسبوك تلقائي"/>
   <meta name="author" content="develop-it.tech"/>
-  <link rel="canonical" href="https://malab.live/"/>
+  <link rel="canonical" href="https://develop-it.tech/stream_agent.php"/>
   <link rel="icon" type="image/png" sizes="32x32" href="/logo.jfif">
   <link rel="apple-touch-icon" href="/logo.jfif">
   <meta property="og:type"        content="website"/>

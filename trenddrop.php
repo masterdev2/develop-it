@@ -58,6 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_contact'])) {
     <meta name="keywords" content="trenddrop, dropshipping, product research, trending products, ai ad copy, google trends, tiktok trends, supplier sourcing, competitor analysis">
     <meta name="author" content="develop-it">
     <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://develop-it.tech/trenddrop.php">
     <link rel="icon" type="image/png" sizes="32x32" href="/logo.jfif">
     <link rel="apple-touch-icon" href="/logo.jfif">
     <meta property="og:type"        content="website">

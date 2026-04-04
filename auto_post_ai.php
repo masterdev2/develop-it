@@ -7,6 +7,7 @@
     <meta name="description" content="Auto-Post AI Studio par develop-it - Automatisation complète des réseaux sociaux par IA. Génération de contenu, publication multi-plateformes, planification intelligente.">
     <meta name="keywords" content="develop-it, auto-post ai, automatisation réseaux sociaux, IA, n8n, marketing automation, maroc">
     <meta name="author" content="develop-it">
+    <meta name="robots" content="index, follow">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="canonical" href="https://develop-it.tech/auto_post_ai.php">
     <meta property="og:type" content="website">

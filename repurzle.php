@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit_contact'])) {
   <meta name="keywords" content="AI content repurposing, content marketing tool, social media automation, Twitter thread generator, TikTok script generator, content creator tools"/>
   <meta name="author" content="Repurzel"/>
   <meta name="robots" content="index, follow"/>
-  <link rel="canonical" href="https://repurzel.com/"/>
+  <link rel="canonical" href="https://develop-it.tech/repurzle.php"/>
   <link rel="icon" type="image/png" sizes="32x32" href="/logo.jfif">
   <link rel="icon" type="image/png" sizes="16x16" href="/logo.jfif">
   <link rel="apple-touch-icon" href="/logo.jfif">

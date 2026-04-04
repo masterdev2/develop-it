@@ -70,7 +70,7 @@ $js_popupError     = $popupError     ? json_encode($popupError) : 'false';
   <meta name="author" content="DEVELOP IT">
   <meta name="robots" content="index, follow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="canonical" href="https://develop-it.tech/gescom_landing.php">
+  <link rel="canonical" href="https://develop-it.tech/ges_com.php">
 
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://develop-it.tech/gescom_landing.php">
