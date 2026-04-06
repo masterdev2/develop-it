@@ -70,9 +70,11 @@ try {
 <style>
 *,::before,::after{box-sizing:border-box}
 html,body{overflow-x:hidden;max-width:100vw;margin:0}
-body{font-family:'Inter','Inter fallback',system-ui,sans-serif;background:#050510;color:#e2e8f0;font-size-adjust:0.51}
-.font-mono{font-family:'JetBrains Mono',monospace;font-size-adjust:0.52}
+body{font-family:'Inter','Inter fallback',system-ui,sans-serif;background:#050510;color:#e2e8f0}
+.font-mono{font-family:'JetBrains Mono',monospace}
 html{scroll-behavior:smooth}
+/* Prevent CLS from font swap */
+@font-face{font-family:'Inter fallback';src:local('Arial');ascent-override:90%;descent-override:22%;line-gap-override:0%;size-adjust:107%}
 /* Font fallback sizing to prevent CLS */
 @font-face{font-family:'Inter fallback';src:local('Arial');ascent-override:90%;descent-override:22%;line-gap-override:0%;size-adjust:107%}
 
@@ -131,7 +133,7 @@ html{scroll-behavior:smooth}
     <div class="flex items-center justify-between gap-3">
       <a href="/" class="flex items-center gap-2 sm:gap-3 min-w-0">
         <img src="/logo.jfif" alt="DEVELOP IT logo" width="40" height="40" class="w-8 h-8 sm:w-10 sm:h-10 rounded-lg object-cover flex-shrink-0 ring-1 ring-indigo-500/30">
-        <span class="text-lg sm:text-xl font-bold text-white truncate">DEVELOP<span class="text-indigo-400">.IT</span></span>
+        <span class="text-lg sm:text-xl font-bold text-white truncate">DEVELOP IT</span>
       </a>
       <div class="nav-links hidden md:flex items-center gap-5 lg:gap-7">
         <a href="#about"     class="text-slate-400 hover:text-white text-sm" data-i18n="nav_about">À propos</a>
@@ -464,7 +466,7 @@ html{scroll-behavior:smooth}
       ];
       foreach($faqs as $f): ?>
       <div class="faq-item" data-category="<?=$f[0]?>" data-aos="fade-up">
-        <button class="faq-question w-full text-left p-4 sm:p-5 rounded-xl transition flex items-center justify-between gap-4" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)" aria-expanded="false">
+        <button class="faq-question w-full text-left p-4 sm:p-5 rounded-xl flex items-center justify-between gap-4" style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)" aria-expanded="false">
           <span class="font-semibold text-white text-sm sm:text-base" data-i18n="<?=$f[1]?>"><?=$f[2]?></span>
           <svg class="w-5 h-5 text-indigo-400 flex-shrink-0 transition-transform faq-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
         </button>
@@ -517,11 +519,11 @@ html{scroll-behavior:smooth}
       <?php endif; ?>
       <form method="POST" action="#contact" class="space-y-4">
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div><label for="f_name" class="block text-xs font-semibold text-slate-400 mb-1.5" data-i18n="contact_name_label">Nom complet *</label><input id="f_name" type="text" name="name" required autocomplete="name" value="<?=htmlspecialchars($_POST['name']??'')?>" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-600 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500/30 transition text-sm" placeholder="Votre nom" data-i18n-placeholder="contact_name_ph"></div>
-          <div><label for="f_email" class="block text-xs font-semibold text-slate-400 mb-1.5" data-i18n="contact_email_label">Email *</label><input id="f_email" type="email" name="email" required autocomplete="email" value="<?=htmlspecialchars($_POST['email']??'')?>" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-600 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500/30 transition text-sm" placeholder="votre@email.com"></div>
+          <div><label for="f_name" class="block text-xs font-semibold text-slate-400 mb-1.5" data-i18n="contact_name_label">Nom complet *</label><input id="f_name" type="text" name="name" required autocomplete="name" value="<?=htmlspecialchars($_POST['name']??'')?>" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-600 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500/30 transition-colors text-sm" placeholder="Votre nom" data-i18n-placeholder="contact_name_ph"></div>
+          <div><label for="f_email" class="block text-xs font-semibold text-slate-400 mb-1.5" data-i18n="contact_email_label">Email *</label><input id="f_email" type="email" name="email" required autocomplete="email" value="<?=htmlspecialchars($_POST['email']??'')?>" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-600 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500/30 transition-colors text-sm" placeholder="votre@email.com"></div>
         </div>
-        <div><label for="f_subject" class="block text-xs font-semibold text-slate-400 mb-1.5" data-i18n="contact_subject_label">Sujet *</label><input id="f_subject" type="text" name="subject" required value="<?=htmlspecialchars($_POST['subject']??'')?>" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-600 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500/30 transition text-sm" placeholder="Comment pouvons-nous vous aider?" data-i18n-placeholder="contact_subject_ph"></div>
-        <div><label for="f_message" class="block text-xs font-semibold text-slate-400 mb-1.5" data-i18n="contact_msg_label">Message *</label><textarea id="f_message" name="message" rows="5" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-600 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500/30 transition resize-none text-sm" placeholder="Décrivez votre projet..." data-i18n-placeholder="contact_msg_ph"><?=htmlspecialchars($_POST['message']??'')?></textarea></div>
+        <div><label for="f_subject" class="block text-xs font-semibold text-slate-400 mb-1.5" data-i18n="contact_subject_label">Sujet *</label><input id="f_subject" type="text" name="subject" required value="<?=htmlspecialchars($_POST['subject']??'')?>" class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-600 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500/30 transition-colors text-sm" placeholder="Comment pouvons-nous vous aider?" data-i18n-placeholder="contact_subject_ph"></div>
+        <div><label for="f_message" class="block text-xs font-semibold text-slate-400 mb-1.5" data-i18n="contact_msg_label">Message *</label><textarea id="f_message" name="message" rows="5" required class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-slate-600 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500/30 transition-colors resize-none text-sm" placeholder="Décrivez votre projet..." data-i18n-placeholder="contact_msg_ph"><?=htmlspecialchars($_POST['message']??'')?></textarea></div>
         <div class="text-center pt-2"><button type="submit" name="submit_contact" class="btn-neon px-8 py-3.5 rounded-xl font-semibold text-sm" data-i18n="contact_submit">🚀 Envoyer le message</button></div>
       </form>
     </div>
@@ -534,34 +536,35 @@ html{scroll-behavior:smooth}
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <div class="footer-grid grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mb-8">
       <div class="col-span-2 md:col-span-1">
-        <div class="flex items-center gap-2 mb-4"><img src="/logo.jfif" alt="DEVELOP IT" width="32" height="32" class="w-7 h-7 rounded-lg object-cover ring-1 ring-indigo-500/30"><span class="text-white font-bold">DEVELOP<span class="text-indigo-400">.IT</span></span></div>
+        <div class="flex items-center gap-2 mb-4"><img src="/logo.jfif" alt="DEVELOP IT" width="32" height="32" class="w-7 h-7 rounded-lg object-cover ring-1 ring-indigo-500/30"><span class="text-white font-bold">DEVELOP IT</span></div>
         <p class="text-sm text-slate-300 leading-relaxed" data-i18n="footer_desc">Agence de développement informatique et intelligence artificielle basée au Maroc.</p>
       </div>
       <div>
         <h4 class="text-white font-semibold mb-3 text-sm" data-i18n="footer_services">Services</h4>
         <ul class="space-y-2 text-sm text-slate-300">
-          <li><a href="#about" class="hover:text-indigo-400 transition py-1 inline-block" data-i18n="footer_svc1">Développement Web</a></li>
-          <li><a href="#about" class="hover:text-indigo-400 transition py-1 inline-block" data-i18n="footer_svc2">Applications Mobile</a></li>
-          <li><a href="#about" class="hover:text-indigo-400 transition py-1 inline-block" data-i18n="footer_svc3">Intelligence Artificielle</a></li>
-          <li><a href="#about" class="hover:text-indigo-400 transition py-1 inline-block" data-i18n="footer_svc4">Cloud & DevOps</a></li>
+          <li><a href="#about" class="hover:text-indigo-400 transition-colors py-1 inline-block" data-i18n="footer_svc1">Développement Web</a></li>
+          <li><a href="#about" class="hover:text-indigo-400 transition-colors py-1 inline-block" data-i18n="footer_svc2">Applications Mobile</a></li>
+          <li><a href="#about" class="hover:text-indigo-400 transition-colors py-1 inline-block" data-i18n="footer_svc3">Intelligence Artificielle</a></li>
+          <li><a href="#about" class="hover:text-indigo-400 transition-colors py-1 inline-block" data-i18n="footer_svc4">Cloud & DevOps</a></li>
         </ul>
       </div>
       <div>
         <h4 class="text-white font-semibold mb-3 text-sm" data-i18n="footer_solutions">Solutions</h4>
         <ul class="space-y-2 text-sm text-slate-300">
-          <li><a href="ges_com.php" class="hover:text-indigo-400 transition py-1 inline-block">GESCOM ERP</a></li>
-          <li><a href="solution_pointage.php" class="hover:text-indigo-400 transition py-1 inline-block">HR Manager</a></li>
-          <li><a href="auto_post_ai.php" class="hover:text-indigo-400 transition py-1 inline-block">Auto-Post AI</a></li>
-          <li><a href="btp_manager.php" class="hover:text-indigo-400 transition py-1 inline-block">BTP Manager</a></li>
-          <li><a href="wandrly.php" class="hover:text-indigo-400 transition py-1 inline-block">Wandrly</a></li>
-          <li><a href="glowai.php" class="hover:text-indigo-400 transition py-1 inline-block">GlowAI</a></li>
+          <li><a href="ges_com.php" class="hover:text-indigo-400 transition-colors py-1 inline-block">GESCOM ERP</a></li>
+          <li><a href="solution_pointage.php" class="hover:text-indigo-400 transition-colors py-1 inline-block">HR Manager</a></li>
+          <li><a href="auto_post_ai.php" class="hover:text-indigo-400 transition-colors py-1 inline-block">Auto-Post AI</a></li>
+          <li><a href="btp_manager.php" class="hover:text-indigo-400 transition-colors py-1 inline-block">BTP Manager</a></li>
+          <li><a href="wandrly.php" class="hover:text-indigo-400 transition-colors py-1 inline-block">Wandrly</a></li>
+          <li><a href="glowai.php" class="hover:text-indigo-400 transition-colors py-1 inline-block">GlowAI</a></li>
         </ul>
       </div>
       <div>
         <h4 class="text-white font-semibold mb-3 text-sm" data-i18n="footer_follow">Suivez-nous</h4>
         <div class="flex gap-3">
-          <a href="#" class="w-11 h-11 bg-white/5 rounded-lg flex items-center justify-center hover:bg-indigo-600 ring-1 ring-white/10" aria-label="Facebook"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
-          <a href="#" class="w-11 h-11 bg-white/5 rounded-lg flex items-center justify-center hover:bg-indigo-600 ring-1 ring-white/10" aria-label="LinkedIn"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+          <a href="https://web.facebook.com/developitwithus" target="_blank" rel="noopener" class="w-11 h-11 bg-white/5 rounded-lg flex items-center justify-center hover:bg-indigo-600 ring-1 ring-white/10" aria-label="Facebook"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+          <a href="https://www.instagram.com/developit_/" target="_blank" rel="noopener" class="w-11 h-11 bg-white/5 rounded-lg flex items-center justify-center hover:bg-indigo-600 ring-1 ring-white/10" aria-label="Instagram"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+          <a href="https://www.linkedin.com/in/developit-/" target="_blank" rel="noopener" class="w-11 h-11 bg-white/5 rounded-lg flex items-center justify-center hover:bg-indigo-600 ring-1 ring-white/10" aria-label="LinkedIn"><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
         </div>
       </div>
     </div>
