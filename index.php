@@ -383,6 +383,21 @@ html{scroll-behavior:smooth}
   </div>
 </section>
 
+<?php if (defined('ADSENSE_CLIENT_ID') && ADSENSE_CLIENT_ID && defined('ADSENSE_SLOT_HOME') && ADSENSE_SLOT_HOME): ?>
+<!-- AdSense — homepage mid-page -->
+<div class="bg-white py-4 px-4">
+    <div class="max-w-7xl mx-auto">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="<?= htmlspecialchars(ADSENSE_CLIENT_ID) ?>"
+             data-ad-slot="<?= htmlspecialchars(ADSENSE_SLOT_HOME) ?>"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+</div>
+<?php endif; ?>
+
 <!-- ── TECH STACK ── -->
 <section class="py-20 sm:py-28 section-dark relative">
   <div class="absolute inset-0 grid-bg opacity-30" aria-hidden="true"></div>

@@ -45,11 +45,6 @@ $blogs = $result->fetch_all(MYSQLI_ASSOC);
       ]}
     }
     </script>
-    <?php if (ADSENSE_CLIENT_ID): ?>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=<?= htmlspecialchars(ADSENSE_CLIENT_ID) ?>"
-            crossorigin="anonymous"></script>
-    <?php endif; ?>
-
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

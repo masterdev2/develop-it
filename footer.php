@@ -3,7 +3,34 @@
 $current  = $_SERVER['REQUEST_URI'] ?? '/';
 $is_blog  = strpos($current, '/blog') !== false;
 $base     = $is_blog ? '' : '';
+
+// Load config (safe — skips if already loaded)
+if (!defined('CONFIG_LOADED')) {
+    require_once __DIR__ . '/config.php';
+}
 ?>
+
+<?php if (defined('ADSENSE_CLIENT_ID') && ADSENSE_CLIENT_ID): ?>
+<!-- Google AdSense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=<?= htmlspecialchars(ADSENSE_CLIENT_ID) ?>"
+        crossorigin="anonymous"></script>
+<?php endif; ?>
+
+<?php if (defined('ADSENSE_CLIENT_ID') && ADSENSE_CLIENT_ID && defined('ADSENSE_SLOT_FOOTER') && ADSENSE_SLOT_FOOTER): ?>
+<!-- Pre-footer ad — shown on all pages -->
+<div class="bg-white py-4 px-4">
+    <div class="max-w-7xl mx-auto">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="<?= htmlspecialchars(ADSENSE_CLIENT_ID) ?>"
+             data-ad-slot="<?= htmlspecialchars(ADSENSE_SLOT_FOOTER) ?>"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    </div>
+</div>
+<?php endif; ?>
+
 <footer class="bg-black text-slate-400 py-10 sm:py-12" role="contentinfo">
   <div class="max-w-7xl mx-auto px-4 sm:px-6">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 mb-6 sm:mb-8">

@@ -59,7 +59,9 @@ define('FACEBOOK_PAGE_ACCESS_TOKEN', env('FACEBOOK_PAGE_ACCESS_TOKEN'));
 define('FACEBOOK_PAGE_ID',           env('FACEBOOK_PAGE_ID'));
 
 // Google AdSense
-define('ADSENSE_CLIENT_ID',     env('ADSENSE_CLIENT_ID'));
-define('ADSENSE_SLOT_POST_TOP',    env('ADSENSE_SLOT_POST_TOP'));
-define('ADSENSE_SLOT_POST_BOTTOM', env('ADSENSE_SLOT_POST_BOTTOM'));
-define('ADSENSE_SLOT_BLOG',        env('ADSENSE_SLOT_BLOG'));
+define('ADSENSE_CLIENT_ID',        env('ADSENSE_CLIENT_ID'));
+define('ADSENSE_SLOT_FOOTER',      env('ADSENSE_SLOT_FOOTER'));      // pre-footer banner — shown on ALL pages
+define('ADSENSE_SLOT_POST_TOP',    env('ADSENSE_SLOT_POST_TOP'));    // blog post — above content
+define('ADSENSE_SLOT_POST_BOTTOM', env('ADSENSE_SLOT_POST_BOTTOM')); // blog post — below content
+define('ADSENSE_SLOT_BLOG',        env('ADSENSE_SLOT_BLOG'));        // blog listing — below grid
+define('ADSENSE_SLOT_HOME',        env('ADSENSE_SLOT_HOME'));        // homepage — mid-page
