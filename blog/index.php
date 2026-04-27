@@ -30,6 +30,7 @@ $blogs = $result->fetch_all(MYSQLI_ASSOC);
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Blog DEVELOP IT — Tech, IA & Transformation Digitale">
     <meta name="twitter:description" content="Articles sur le développement web, l'IA et la transformation digitale.">
+    <meta name="google-adsense-account" content="<?= htmlspecialchars(ADSENSE_CLIENT_ID) ?>">
     <script type="application/ld+json">
     {
       "@context":"https://schema.org",

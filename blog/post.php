@@ -29,6 +29,7 @@ $canonical = "https://develop-it.tech/blog/post.php?slug=" . urlencode($slug);
     <meta name="keywords" content="<?= htmlspecialchars($post['meta_keywords']) ?>">
     <meta name="author" content="<?= htmlspecialchars($post['author']) ?>">
     <meta name="robots" content="index, follow">
+    <meta name="google-adsense-account" content="<?= htmlspecialchars(ADSENSE_CLIENT_ID) ?>">
     <link rel="canonical" href="<?= $canonical ?>">
 
     <!-- Open Graph -->

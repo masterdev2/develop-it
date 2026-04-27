@@ -55,6 +55,9 @@ try {
 <meta property="og:description" content="Agence marocaine de développement informatique avec +10 ans d'expérience.">
 <meta property="og:image" content="https://develop-it.tech/logo.jfif">
 <meta name="twitter:card" content="summary_large_image">
+<?php if (defined('ADSENSE_CLIENT_ID') && ADSENSE_CLIENT_ID): ?>
+<meta name="google-adsense-account" content="<?= htmlspecialchars(ADSENSE_CLIENT_ID) ?>">
+<?php endif; ?>
 <link rel="icon" type="image/jpeg" href="/logo.jfif">
 <link rel="apple-touch-icon" href="/logo.jfif">
 <link rel="preconnect" href="https://fonts.googleapis.com">
