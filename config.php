@@ -51,3 +51,15 @@ define('LINKEDIN_CLIENT_ID',   env('LINKEDIN_CLIENT_ID'));
 define('LINKEDIN_CLIENT_SECRET', env('LINKEDIN_CLIENT_SECRET'));
 define('UNSPLASH_KEY',         env('UNSPLASH_KEY'));
 define('SITE_URL',             env('SITE_URL', 'https://develop-it.tech'));
+
+// Facebook
+define('FACEBOOK_APP_ID',            env('FACEBOOK_APP_ID'));
+define('FACEBOOK_APP_SECRET',        env('FACEBOOK_APP_SECRET'));
+define('FACEBOOK_PAGE_ACCESS_TOKEN', env('FACEBOOK_PAGE_ACCESS_TOKEN'));
+define('FACEBOOK_PAGE_ID',           env('FACEBOOK_PAGE_ID'));
+
+// Google AdSense
+define('ADSENSE_CLIENT_ID',     env('ADSENSE_CLIENT_ID'));
+define('ADSENSE_SLOT_POST_TOP',    env('ADSENSE_SLOT_POST_TOP'));
+define('ADSENSE_SLOT_POST_BOTTOM', env('ADSENSE_SLOT_POST_BOTTOM'));
+define('ADSENSE_SLOT_BLOG',        env('ADSENSE_SLOT_BLOG'));

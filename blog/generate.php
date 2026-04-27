@@ -250,6 +250,22 @@ ENGAGEMENT HOOK at end of linkedin_post:
 - Or make a bold statement: "Ceux qui ne font pas ça en 2025 vont souffrir."
 - Or create FOMO: "Le prochain article explique comment doubler ça."
 
+FACEBOOK POST RULES:
+- Max 700 chars — Facebook rewards concise, conversation-starting posts
+- Tone is more casual and warm than LinkedIn (write like a friend, not a professional)
+- Use 2-3 emojis max, placed naturally (not clustered at end)
+- Use 2-3 relevant hashtags max, appended at the very end
+- MUST end with a direct question to the reader to encourage comments
+- Then the URL on its own line: {URL}
+- Avoid corporate speak — short sentences, conversational French
+- Examples by type:
+  - ai_passive_income: "Et si votre téléphone travaillait pendant que vous dormez ? 😴"
+  - ai_cash_machine: "Quelqu\'un dans notre réseau a fait X DH ce mois avec juste Claude..."
+  - humor: Lead with the punchline or the most absurd situation
+  - myth_busting: "On va briser un mythe aujourd\'hui :"
+  - opinion: A bold statement that makes people want to agree OR disagree
+  - casestudy: Lead with the result, then tease the method
+
 Return ONLY valid JSON (no markdown fences, no extra text) with these exact fields:
 {
   "title": "Clickworthy title with hook and specifics (60-70 chars)",
@@ -260,7 +276,8 @@ Return ONLY valid JSON (no markdown fences, no extra text) with these exact fiel
   "meta_keywords": "6-8 comma-separated relevant keywords",
   "cover_keywords": "3-4 specific English words for Unsplash image search",
   "content": "Full article HTML 800+ words — specific, actionable, with personality and humor",
-  "linkedin_post": "LinkedIn post max 1200 chars, line breaks after each idea, 3-5 emojis, 4-5 hashtags, engagement hook at end, must end with: Lire l article complet 👉 {URL}"
+  "linkedin_post": "LinkedIn post max 1200 chars, line breaks after each idea, 3-5 emojis, 4-5 hashtags, engagement hook at end, must end with: Lire l article complet 👉 {URL}",
+  "facebook_post": "Facebook post max 700 chars, casual tone, 2-3 emojis, 2-3 hashtags at end, must end with a question then URL on new line: {URL}"
 }';
 
 $fullPrompt = $strategy['prompt'] . "\n\n" . $baseInstructions;
@@ -333,10 +350,21 @@ echo "💾 Saved to DB (ID: $blogId)\n";
 
 echo "📤 Posting to LinkedIn...\n";
 
-// FIX 3: $blogUrl now exists when we need it here
 $liText = str_replace('{URL}', $blogUrl, $data['linkedin_post']);
 $ok     = postToLinkedIn($liText, $blogUrl, $data['title'], $data['excerpt'], $imgUrl);
 echo $ok ? "✅ LinkedIn published!\n" : "⚠️  LinkedIn failed (token not configured?)\n";
+
+// ── STEP 7: Post to Facebook ──────────────────────────────────────────
+
+echo "📤 Posting to Facebook...\n";
+
+if (!empty($data['facebook_post'])) {
+    $fbText = str_replace('{URL}', $blogUrl, $data['facebook_post']);
+    $ok     = postToFacebook($fbText, $blogUrl, $data['title'], $imgUrl);
+    echo $ok ? "✅ Facebook published!\n" : "⚠️  Facebook failed (token not configured?)\n";
+} else {
+    echo "⚠️  No facebook_post in AI response, skipping Facebook\n";
+}
 
 echo "\n🎉 Done! → $blogUrl\n";
 
@@ -573,24 +601,90 @@ function postToLinkedInTextOnly(string $text, string $url, string $title, string
 }
 
 function generateUniqueSlug(string $base, mysqli $db): string {
-    // Remove accents
     $slug = iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $base);
-    // Lowercase
     $slug = strtolower($slug);
-    // Replace anything not a letter/number with a dash
     $slug = preg_replace('/[^a-z0-9]+/', '-', $slug);
-    // Remove leading/trailing dashes
     $slug = trim($slug, '-');
-    // Collapse multiple dashes
     $slug = preg_replace('/-+/', '-', $slug);
 
-    // Ensure uniqueness
     $orig = $slug;
     $i    = 1;
     while ($db->query("SELECT id FROM blogs WHERE slug='" . $db->real_escape_string($slug) . "'")->num_rows > 0) {
         $slug = $orig . '-' . $i++;
     }
     return $slug;
+}
+
+// ── Facebook helpers ──────────────────────────────────────────────────────────
+
+/**
+ * Post to a Facebook Page using the Graph API v19.0.
+ * Tries a photo post first (richer engagement), falls back to a link post.
+ *
+ * Requires FACEBOOK_PAGE_ID and FACEBOOK_PAGE_ACCESS_TOKEN in .env.
+ * Obtain a long-lived page access token via /blog/facebook-callback.php.
+ */
+function postToFacebook(string $text, string $url, string $title, string $imgUrl): bool {
+    if (!FACEBOOK_PAGE_ID || !FACEBOOK_PAGE_ACCESS_TOKEN) {
+        echo "⚠️  Facebook credentials not configured (FACEBOOK_PAGE_ID / FACEBOOK_PAGE_ACCESS_TOKEN)\n";
+        return false;
+    }
+
+    // ── Attempt 1: photo post with caption (displays image inline, great for reach) ──
+    $ch = curl_init('https://graph.facebook.com/v19.0/' . FACEBOOK_PAGE_ID . '/photos');
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_POST           => true,
+        CURLOPT_POSTFIELDS     => [
+            'url'          => $imgUrl,
+            'caption'      => $text,
+            'access_token' => FACEBOOK_PAGE_ACCESS_TOKEN,
+        ],
+        CURLOPT_SSL_VERIFYPEER => false,
+        CURLOPT_TIMEOUT        => 30,
+    ]);
+    $res  = curl_exec($ch);
+    $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    echo "Facebook photo post ($code): $res\n";
+
+    if ($code === 200) {
+        return true;
+    }
+
+    // ── Attempt 2: feed post with link preview ────────────────────────────────
+    echo "⚠️  Photo post failed, falling back to feed post\n";
+    return postToFacebookTextOnly($text, $url);
+}
+
+/**
+ * Post a plain message + link to a Facebook Page (no image).
+ * Facebook will generate a link preview card automatically.
+ */
+function postToFacebookTextOnly(string $text, string $url): bool {
+    if (!FACEBOOK_PAGE_ID || !FACEBOOK_PAGE_ACCESS_TOKEN) {
+        return false;
+    }
+
+    $ch = curl_init('https://graph.facebook.com/v19.0/' . FACEBOOK_PAGE_ID . '/feed');
+    curl_setopt_array($ch, [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_POST           => true,
+        CURLOPT_POSTFIELDS     => [
+            'message'      => $text,
+            'link'         => $url,
+            'access_token' => FACEBOOK_PAGE_ACCESS_TOKEN,
+        ],
+        CURLOPT_SSL_VERIFYPEER => false,
+        CURLOPT_TIMEOUT        => 30,
+    ]);
+    $res  = curl_exec($ch);
+    $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    echo "Facebook feed post ($code): $res\n";
+    return $code === 200;
 }
 
 

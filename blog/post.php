@@ -67,6 +67,11 @@ $canonical = "https://develop-it.tech/blog/post.php?slug=" . urlencode($slug);
   }
   </script>
 
+    <?php if (ADSENSE_CLIENT_ID): ?>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=<?= htmlspecialchars(ADSENSE_CLIENT_ID) ?>"
+            crossorigin="anonymous"></script>
+    <?php endif; ?>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -186,10 +191,36 @@ $canonical = "https://develop-it.tech/blog/post.php?slug=" . urlencode($slug);
                         <?= htmlspecialchars($post['excerpt']) ?>
                     </p>
 
+                    <?php if (ADSENSE_CLIENT_ID && ADSENSE_SLOT_POST_TOP): ?>
+                    <!-- AdSense — above content -->
+                    <div class="my-6">
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-client="<?= htmlspecialchars(ADSENSE_CLIENT_ID) ?>"
+                             data-ad-slot="<?= htmlspecialchars(ADSENSE_SLOT_POST_TOP) ?>"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
+                        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                    </div>
+                    <?php endif; ?>
+
                     <!-- Content -->
                     <div class="prose max-w-none">
                         <?= $post['content'] /* HTML content from AI */ ?>
                     </div>
+
+                    <?php if (ADSENSE_CLIENT_ID && ADSENSE_SLOT_POST_BOTTOM): ?>
+                    <!-- AdSense — below content -->
+                    <div class="my-8">
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-client="<?= htmlspecialchars(ADSENSE_CLIENT_ID) ?>"
+                             data-ad-slot="<?= htmlspecialchars(ADSENSE_SLOT_POST_BOTTOM) ?>"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
+                        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                    </div>
+                    <?php endif; ?>
 
                     <!-- Share -->
                     <div class="mt-12 pt-8 border-t border-slate-100">

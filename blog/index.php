@@ -45,6 +45,11 @@ $blogs = $result->fetch_all(MYSQLI_ASSOC);
       ]}
     }
     </script>
+    <?php if (ADSENSE_CLIENT_ID): ?>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=<?= htmlspecialchars(ADSENSE_CLIENT_ID) ?>"
+            crossorigin="anonymous"></script>
+    <?php endif; ?>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -111,6 +116,19 @@ $blogs = $result->fetch_all(MYSQLI_ASSOC);
                             </article>
                         <?php endforeach; ?>
                     </div>
+
+                    <?php if (ADSENSE_CLIENT_ID && ADSENSE_SLOT_BLOG): ?>
+                    <!-- AdSense — below blog grid -->
+                    <div class="mt-10">
+                        <ins class="adsbygoogle"
+                             style="display:block"
+                             data-ad-client="<?= htmlspecialchars(ADSENSE_CLIENT_ID) ?>"
+                             data-ad-slot="<?= htmlspecialchars(ADSENSE_SLOT_BLOG) ?>"
+                             data-ad-format="auto"
+                             data-full-width-responsive="true"></ins>
+                        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+                    </div>
+                    <?php endif; ?>
 
                     <!-- Pagination -->
                     <?php if ($pages > 1): ?>

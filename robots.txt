@@ -6,6 +6,7 @@ Disallow: /config.php
 Disallow: /.env
 Disallow: /blog/generate.php
 Disallow: /blog/linkedin-callback.php
+Disallow: /blog/facebook-callback.php
 
 # Sitemap
 Sitemap: https://develop-it.tech/sitemap.xml
